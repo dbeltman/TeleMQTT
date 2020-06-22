@@ -1,0 +1,3 @@
+paramiko
+schedule>=0.6.0
+paho-mqtt>=1.5.0
