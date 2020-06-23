@@ -33,8 +33,8 @@ def publish_fan_speed():
 	publish_telemetry(fan_speed, 'telemqtt/fanspeed')
 	return fan_speed
 
-schedule.every(2).minutes.do(publish_ambient_temperature)
-schedule.every(10).minutes.do(publish_fan_speed)
+schedule.every(1).minutes.do(publish_ambient_temperature)
+schedule.every(1).minutes.do(publish_fan_speed)
 
 startup()
 
