@@ -9,6 +9,8 @@ else:
 
 
 def publish_telemetry(payload, topic):
+	print("MQTT publishing to " + str(topic )+ " with payload " + str(payload) + "on host:port " + os.environ.get(
+		'MQTTHOST') + str(mqttport))
 	mqtt_publish.single(topic, payload,
 						hostname=os.environ.get('MQTTHOST'),
 						client_id=os.environ.get('MQTTCLIENT'),

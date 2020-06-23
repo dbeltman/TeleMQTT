@@ -10,9 +10,9 @@ key = paramiko.RSAKey.from_private_key_file(os.environ.get('R510KEYPATH'))
 def set_auto():
 	conn = paramiko.SSHClient()
 	conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	print("connecting")
+	print("connecting to " + host + " key " + key)
 	conn.connect(hostname=host, username=os.environ.get('R510USERNAME'), pkey=key)
-	print("connected")
+	print("connected, script path: " + script_path)
 	command = "sudo bash " + script_path + " auto"
 	print("Executing {}".format(command))
 	stdin, stdout, stderr = conn.exec_command(command)
@@ -51,9 +51,9 @@ def set_manual(value):
 def get_status():
 	conn = paramiko.SSHClient()
 	conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	print("connecting")
+	print("connecting to " + host + " user " + os.environ.get('R510USERNAME'))
 	conn.connect(hostname=host, username=os.environ.get('R510USERNAME'), pkey=key)
-	print("connected")
+	print("connected, script path: " + script_path)
 	commands = "sudo bash " + script_path + " status"
 	print("Executing {}".format(commands))
 	stdin, stdout, stderr = conn.exec_command(commands)
@@ -66,4 +66,5 @@ def get_status():
 		cleanoutput.append(line.decode('UTF-8'))
 	conn.close()
 	print("Disconnected")
+	print(errors)
 	return cleanoutput
